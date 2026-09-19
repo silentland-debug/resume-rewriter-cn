@@ -166,3 +166,14 @@ GITHUB_PUBLISHING_CHECKLIST.md
 请不要把真实简历、手机号、邮箱、照片、身份证明、学校/公司敏感信息、Word 成品或 HTML 预览上传到公开仓库。
 
 建议公开仓库只包含 Skill 本体、说明文档和脱敏示例。
+
+<!-- gongda-mechanical-resume -->
+## 专业化 Skill：工大机械类求职简历
+
+仓库新增 `skills/gongda-mechanical-resume/`，面向天津工业大学机械、机械电子、飞行器制造、智能制造等方向学生，由学生本人上传原始简历和目标岗位 JD 后进行岗位定制。
+
+核心流程：**拆 JD → 对证据 → 扫描潜在线索 → 追问补证据 → 材料取舍 → 工程化改写 → HR 复审 → 一页 A4 定稿**。
+
+与通用版相比，这个版本进一步强化了机械类工程证据的还原，并会主动扫描竞赛、课程设计、论文/专利、简略项目等容易被埋掉的材料；只有在学生确认真实技术工作后，才会把竞赛奖项升级为项目经历，不根据 JD 反向编造工程图、BOM、供应商、量产、成本或效率数据。
+
+详细说明见：[`docs/gongda-mechanical-resume.md`](docs/gongda-mechanical-resume.md)。

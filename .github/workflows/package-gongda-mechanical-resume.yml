@@ -1,0 +1,52 @@
+name: Package Gongda Mechanical Resume Skill
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/gongda-mechanical-resume/**'
+      - '.github/workflows/package-gongda-mechanical-resume.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="skills/gongda-mechanical-resume"
+          test -f "$base/SKILL.md"
+          test -f "$base/agents/openai.yaml"
+          test -f "$base/references/jd-workflow.md"
+          test -f "$base/references/student-interaction.md"
+          test -f "$base/references/research-to-industry.md"
+          test -f "$base/references/output-modes.md"
+          test -f "$base/assets/mit-template-b-cn.docx"
+          grep -q '^name: gongda-mechanical-resume$' "$base/SKILL.md"
+          grep -q 'potential' /dev/null 2>/dev/null || true
+          echo "Required files are present."
+
+      - name: Package skill
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          zip -rq dist/gongda-mechanical-resume-skill.zip skills/gongda-mechanical-resume
+          shasum -a 256 dist/gongda-mechanical-resume-skill.zip > dist/SHA256SUMS.txt
+
+      - name: Upload packaged skill
+        uses: actions/upload-artifact@v4
+        with:
+          name: gongda-mechanical-resume-skill
+          path: |
+            dist/gongda-mechanical-resume-skill.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
